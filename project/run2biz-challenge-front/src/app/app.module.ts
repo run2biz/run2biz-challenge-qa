@@ -16,7 +16,6 @@ import { RegistrationModule } from './pages/registration';
     HomeModule,
     RegistrationModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
