@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -9,10 +10,18 @@ import { AuthService } from 'src/app/service/auth.service';
 export class RegistrationComponent implements OnInit {
   form = this.fb.group({
     name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-    cpf: ['', [Validators.required, Validators.pattern('[0-9 ]*'), Validators.maxLength(11)]],
+    cpf: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('[0-9 ]*'),
+        Validators.maxLength(11),
+      ],
+    ],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
+  loading = false;
 
   get invalidForm() {
     return this.form.invalid;
@@ -31,16 +40,32 @@ export class RegistrationComponent implements OnInit {
   }
 
   get passwordInputError() {
-    return this.form.controls.password.errors && this.form.controls.password.touched;
+    return (
+      this.form.controls.password.errors && this.form.controls.password.touched
+    );
   }
 
-  constructor(private fb: FormBuilder, private api: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private api: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    this.api.createUser(this.form.value).subscribe(response => {
-      console.log("response", response);
-    });
+    this.loading = true;
+    this.api.createUser(this.form.value).subscribe(
+      () => {
+        alert('Usuário cadastrado com sucesso! Faça seu login');
+        this.form.reset();
+        this.loading = false;
+      },
+      () => (this.loading = false)
+    );
+  }
+
+  goToLogin() {
+    this.router.navigate(['']);
   }
 }

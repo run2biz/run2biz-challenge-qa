@@ -75,10 +75,10 @@
       </div>
     </div>
     <div class="container__button">
-      <button type="submit" [attr.disabled]="invalidForm ? '' : null">
-        Cadastrar
+      <button type="submit" [attr.disabled]="invalidForm || loading ? '' : null">
+        {{ !loading ? 'Cadastrar' : 'Carrengando...'}}
       </button>
-      <a href="">Já possui conta? Entre agora mesmo</a>
+      <a (click)="goToLogin()">Já possui conta? Entre agora mesmo</a>
     </div>
   </form>
 </main>

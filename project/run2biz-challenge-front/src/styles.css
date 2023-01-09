@@ -93,4 +93,9 @@ button:disabled {
 .container__button a {
   font-size: 12px;
   color: black;
+  cursor: pointer;
+}
+
+.container__button a:hover {
+  text-decoration: underline;
 }
