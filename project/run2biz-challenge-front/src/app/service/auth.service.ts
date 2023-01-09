@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
-  })
-};
 
 const baseUrl = 'http://localhost:8080/api/v1';
 
@@ -32,13 +25,13 @@ export class AuthService {
 
   login(data: LoginData) {
     return this.api
-      .post(`${baseUrl}/users/auth`, data, httpOptions)
+      .post(`${baseUrl}/users/auth`, data)
       .pipe(catchError(this.#handleError));
   }
 
   createUser(data: User) {
     return this.api
-      .post(`${baseUrl}/users`, data, httpOptions)
+      .post(`${baseUrl}/users`, data)
       .pipe(catchError(this.#handleError));
   }
 
