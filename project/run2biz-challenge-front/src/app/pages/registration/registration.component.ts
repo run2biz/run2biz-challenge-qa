@@ -61,7 +61,16 @@ export class RegistrationComponent implements OnInit {
         this.form.reset();
         this.loading = false;
       },
-      () => (this.loading = false)
+      (err) => {
+        this.loading = false;
+
+        const errors = err.error.errors;
+        errors.map(error => {
+          if (error.fieldName.includes('email')) {
+            alert("Erro!\nEsse e-mail já foi cadastrado por outro usuário!")
+          }
+        })
+      }
     );
   }
 

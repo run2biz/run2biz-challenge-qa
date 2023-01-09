@@ -44,7 +44,10 @@ export class HomeComponent implements OnInit {
         this.form.reset();
         this.loading = false;
       },
-      () => (this.loading = false)
+      () => {
+        this.loading = false;
+        alert('Dados inválidos!\nVerifique suas informações!');
+      }
     );
   }
 
