@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
-import { firstLetterUpperCase, formatCpf } from 'src/app/utils/string';
-
-type Error = {
-  fieldName: string;
-  message: string;
-};
+import { showError, Error } from 'src/app/utils/errors';
+import { formatCpf } from 'src/app/utils/string';
 
 @Component({
   selector: 'app-registration',
@@ -68,15 +64,8 @@ export class RegistrationComponent implements OnInit {
       (err) => {
         this.loading = false;
 
-        const errors = err.error.errors;
-        errors.map((error: Error) => {
-          if (error.fieldName.includes('email')) {
-            alert('Erro!\nEsse e-mail já foi cadastrado por outro usuário!');
-          }
-          if (error.fieldName.includes('cpf')) {
-            alert(`Erro!\n${firstLetterUpperCase(error.message)}!`);
-          }
-        });
+        const errors = err.error.errors as Error[];
+        showError(errors);
       }
     );
   }
