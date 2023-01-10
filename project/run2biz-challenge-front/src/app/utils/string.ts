@@ -1,7 +1,3 @@
-function firstLetterUpperCase(str: string) {
-  return str.replace(/^\w/, (c) => c.toUpperCase());
-}
-
 function formatCpf(event: Event) {
   let value = (event.target as HTMLInputElement).value;
   value = value.replace(/\D/g, '');
@@ -11,4 +7,4 @@ function formatCpf(event: Event) {
   (event.target as HTMLInputElement).value = value;
 }
 
-export { firstLetterUpperCase, formatCpf }
+export { formatCpf }
