@@ -38,10 +38,10 @@
       </div>
     </div>
     <div class="container__button">
-      <button type="submit" [attr.disabled]="invalidForm ? '' : null">
-        Entrar
+      <button type="submit" [attr.disabled]="invalidForm || loading ? '' : null">
+        {{ !loading ? 'Entrar' : 'Carrengando...'}}
       </button>
-      <a href="">Não possui conta? Cadastre-se agora mesmo</a>
+      <a (click)="goToRegister()">Não possui conta? Cadastre-se agora mesmo</a>
     </div>
   </form>
 </main>

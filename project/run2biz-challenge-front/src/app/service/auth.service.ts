@@ -36,9 +36,6 @@ export class AuthService {
   }
 
   #handleError = (res: HttpErrorResponse) => {
-    const message = res.error?.title || res.message;
-
-    console.log('error message', message);
     return throwError(res);
   };
 }
