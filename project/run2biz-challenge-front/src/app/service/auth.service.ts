@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 
 const baseUrl = 'http://localhost:8080/api/v1';
 
@@ -23,9 +22,9 @@ interface Token {
 export class AuthService {
   constructor(private api: HttpClient) {}
 
-  login(data: LoginData) {
+  login(data: LoginData): Observable<Token> {
     return this.api
-      .post(`${baseUrl}/users/auth`, data)
+      .post<Token>(`${baseUrl}/users/auth`, data)
       .pipe(catchError(this.#handleError));
   }
 
@@ -38,4 +37,16 @@ export class AuthService {
   #handleError = (res: HttpErrorResponse) => {
     return throwError(res);
   };
+
+  getToken() {
+    return localStorage.getItem('token-app');
+  }
+
+  isAuthenticated() {
+    return !!this.getToken();
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token-app', token);
+  }
 }

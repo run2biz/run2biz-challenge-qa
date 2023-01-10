@@ -37,16 +37,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    this.loading = true;
     this.api.login(this.form.value).subscribe(
       (response) => {
-        console.log('response', response);
         alert('Login realizado com sucesso!');
         this.form.reset();
         this.loading = false;
+        this.api.setToken(response.token);
+        this.router.navigate(['/inicio']);
       },
       () => {
         this.loading = false;
-        alert('Dados inválidos!\nVerifique suas informações!');
+        alert('Dados inválidos!\nVerifique se e-mail e senha estão corretos!');
       }
     );
   }

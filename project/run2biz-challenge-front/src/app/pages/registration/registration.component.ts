@@ -60,6 +60,7 @@ export class RegistrationComponent implements OnInit {
         alert('Usuário cadastrado com sucesso! Faça seu login');
         this.form.reset();
         this.loading = false;
+        this.goToLogin();
       },
       (err) => {
         this.loading = false;
