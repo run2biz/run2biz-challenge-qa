@@ -49,6 +49,18 @@ Utilizando o [*Robot Framework*](https://robotframework.org), escreva os testes 
 2. Caso a senha ou email sejam inválidos, deve ser exibida uma mensagem de erro;
 3. Após o login, deve ser exibida uma mensagem de sucesso.
 
+# O projeto
+
+Foi desenvolvida uma API REST com Java, respondendo na URL: http://localhost:8080/api/v1, essa API conta com duas rotas: */users* e */users/auth*. Também foi criada uma aplicação Angular, que pode ser acessada em http://localhost:4200.
+
+## Como rodar o projeto
+
+1. Instale o docker na sua máquina: https://docs.docker.com/engine/install/;
+2. Dentro da pasta *project*, execute: [`docker compose up`](https://docs.docker.com/engine/reference/commandline/compose_up/) e aguarde as aplicações inicializarem;
+3. Após realizar os testes, para parar as aplicações, aperte **CTRL + C** na linha de comando e por fim [`docker compose down`](https://docs.docker.com/engine/reference/commandline/compose_down/).
+
+> Existem vários outros recursos do **docker compose**, para mais informações, consulte a documentação oficial: https://docs.docker.com/compose/reference/.
+
 # Como entregar
 
 Você deve disponibilizar os arquivos em algum serviço de hospedagem como Bitbucket, GitLab ou GitHub e manter o repositório como público. Nos envie um email assim que finalizar e informe o que você melhoraria se tivesse mais tempo, caso ache necessário.  
