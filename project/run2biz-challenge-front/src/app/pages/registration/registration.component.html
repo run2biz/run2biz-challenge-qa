@@ -24,18 +24,14 @@
       <input
         id="cpf"
         formControlName="cpf"
+        maxlength="14"
         [ngClass]="{
           invalid__input: cpfInputError
         }"
+        (input)="format($event)"
       />
       <div *ngIf="cpfInputError">
         <span *ngIf="form.controls.cpf.errors.required">CPF é obrigatório</span>
-        <span *ngIf="form.controls.cpf.errors.pattern"
-          >CPF deve conter apenas números</span
-        >
-        <span *ngIf="form.controls.cpf.errors.maxlength"
-          >CPF deve conter 11 digítos</span
-        >
       </div>
     </div>
     <div>
